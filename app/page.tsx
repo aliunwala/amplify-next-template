@@ -6,7 +6,9 @@ import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
-import "@aws-amplify/ui-react/styles.css";
+// eslint-disable-next-line import/no-unresolved
+// import "@aws-amplify/ui-react";
+import { useAuthenticator, UseAuthenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(outputs);
 
@@ -31,6 +33,8 @@ export default function App() {
     });
   }
 
+  const { signOut } = useAuthenticator();
+
   return (
     <main>
       <h1>My todos</h1>
@@ -47,6 +51,7 @@ export default function App() {
           Review next steps of this tutorial.
         </a>
       </div>
+      <button onClick={signOut}>Sign out</button>
     </main>
   );
 }
